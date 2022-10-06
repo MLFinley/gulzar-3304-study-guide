@@ -59,26 +59,26 @@ of syntactic meanings.</p>
 <table>
 <thead>
 <tr class="header">
-<th>Token</th>
-<th>Lexeme Example</th>
+<th style="text-align: left;">Token</th>
+<th style="text-align: right;">Lexeme Example</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>keyword</td>
-<td><code>if else</code></td>
+<td style="text-align: left;">keyword</td>
+<td style="text-align: right;"><code>if else</code></td>
 </tr>
 <tr class="even">
-<td>comparison</td>
-<td><code>&lt;=, !=, ==</code></td>
+<td style="text-align: left;">comparison</td>
+<td style="text-align: right;"><code>&lt;=, !=, ==</code></td>
 </tr>
 <tr class="odd">
-<td>number</td>
-<td><code>0</code></td>
+<td style="text-align: left;">number</td>
+<td style="text-align: right;"><code>0</code></td>
 </tr>
 <tr class="even">
-<td>id</td>
-<td><code>pi, score d2</code></td>
+<td style="text-align: left;">id</td>
+<td style="text-align: right;"><code>pi, score d2</code></td>
 </tr>
 </tbody>
 </table>
@@ -129,7 +129,7 @@ right-most non-terminal.
 </ul></li>
 <li><em>Note</em> some derivations are neither left not right</li>
 </ul>
-<h1 id="big-picture">Big Picture</h1>
+<h1 id="syntax-1">Syntax</h1>
 <p><img src="images/fig1.png" /></p>
 <h2 id="parse-tree">Parse Tree</h2>
 <p>A parse tree is a hierarchal representation of a derivation as a
@@ -274,3 +274,104 @@ of some production</p>
 <p>Two operations - Shift: put token on to stack - Reduce: apply rule to
 elements in stack</p>
 <p><img src="images/fig6.png" /></p>
+<h1 id="sematics">Sematics</h1>
+<p>Meaning of program. Allows us to enforce rules such as type
+consistentcy.</p>
+<p>Two types: static and dynamic.</p>
+<ul>
+<li><strong>Static Sematics</strong>
+<ul>
+<li>Characterstics checked prior to execution.</li>
+<li>Hard to describe with BNF</li>
+<li><em>think types</em></li>
+</ul></li>
+<li><strong>Dynamic Semantics</strong>
+<ul>
+<li>Describes the meaning of expressions</li>
+<li>i.e How to execute</li>
+<li>Enforced at run time</li>
+</ul></li>
+</ul>
+<h2 id="attribute-grammar">Attribute Grammar</h2>
+<ul>
+<li>Used to describe more than can be described with a context-free
+grammar.</li>
+<li><strong>Decorates</strong> parse trees</li>
+<li>The extension includes
+<ul>
+<li>Attributes</li>
+<li>Attribute computation functions</li>
+<li>Predicate functions</li>
+</ul></li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<p>can be split three ways</p>
+<ul>
+<li><strong>Synthesized attributes</strong>
+<ul>
+<li>Pass information up a parse tree</li>
+</ul></li>
+<li><strong>Inherited attributes</strong>
+<ul>
+<li>Pass information down or across a tree
+<ul>
+<li>(From parents/siblings)</li>
+</ul></li>
+</ul></li>
+<li><strong>Intrinsic attributes</strong>
+<ul>
+<li>Determined <em>outside</em> the parse tree
+<ul>
+<li>Ex: type given from symbol table</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="semantic-functions">Semantic Functions</h3>
+<p>You apply the rules to the attributes.</p>
+<p>As an example:</p>
+<p>Syntax: <assign> -&gt; <var> = <expr> Semantic Rule:
+<expr>.expected_type &lt;- <var>.actual_type</p>
+<p>The expected type of <expr> is the actual type of <var></p>
+<h3 id="predicate-functions">Predicate Functions</h3>
+<p>Set of boolean expressions on the attributes.</p>
+<p>Every predicate must be true or its in violation of the sytnax or
+static semantic rules</p>
+<p>As an example:</p>
+<p>Syntax: <expr> -&gt; <var> Semantic Rule: <expr>.actual_type &lt;-
+<var>.actual_type Predicate: <expr>.actual_type ==
+<expr>.expected_type</p>
+<p>The actual type of the expression must match the expected type</p>
+<ul>
+<li>If all attributes are <strong>inherited</strong>, the evaluation
+process can be done in a <strong>top-down order</strong></li>
+<li>Alternatively, if all attributes are <strong>synthesized</strong>,
+the evaluation can proceed in a <strong>bottom-up order</strong></li>
+<li>Determining attribute evaluation order for any attribute grammar is
+a complex problem, requiring the construction of a dependency graph to
+show all attribute dependencies</li>
+</ul>
+<h2 id="dynamic-semantics">Dynamic Semantics</h2>
+<p><em>Note:</em> no single widely accepted notation</p>
+<p>Two common approach: Operation and Denotational</p>
+<h3 id="operational">Operational</h3>
+<p>Describe a programs meaning in terms of its machine
+implementation.</p>
+<p>The <em>change in state</em> defines the meaning of a statement</p>
+<p><strong>Natural operational semantics</strong> are used to describe
+the final execution result of a complete program (Big Step)</p>
+<p>Example: (1+2) + (3+4) = 10</p>
+<p><strong>Structural operational semantics</strong> are used to
+determine the precise meaning of a single statement (Small Step)</p>
+<p>Example: 1 + 2 + (3+4) = 1 + 2 + 7</p>
+<ul>
+<li>Advantages
+<ul>
+<li>Simple and Intuitive for small examples</li>
+<li>Useful for implementation</li>
+</ul></li>
+<li>Disadvantages
+<ul>
+<li>Very complex for large programs</li>
+<li>Lacks mathematical rigor</li>
+</ul></li>
+</ul>

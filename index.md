@@ -51,7 +51,7 @@ A sequence of characters in the source program with the lowest level of syntacti
 **Examples**
 
 Token | Lexeme Example
---- | ---
+:--- | ---:
 keyword | `if else`
 comparison | `<=, !=, ==`
 number | `0`
@@ -87,7 +87,7 @@ Uses **BNF** notation
   - Creates a *right-sentintal form*
 - *Note* some derivations are neither left not right
 
-# Big Picture
+# Syntax
 
 ![](images/fig1.png)
 
@@ -210,3 +210,96 @@ Two operations
 
 ![](images/fig6.png)
 
+# Sematics
+
+Meaning of program. Allows us to enforce rules such as type consistentcy.
+
+Two types: static and dynamic.
+
+- **Static Sematics** 
+  - Characterstics checked prior to execution.
+  - Hard to describe with BNF
+  - *think types*
+- **Dynamic Semantics**
+  - Describes the meaning of expressions
+  - i.e How to execute
+  - Enforced at run time
+
+
+## Attribute Grammar
+
+- Used to describe more than can be described with a context-free grammar.
+- **Decorates** parse trees
+- The extension includes
+  - Attributes
+  - Attribute computation functions
+  - Predicate functions
+
+### Attributes
+
+can be split three ways
+
+- **Synthesized attributes**
+  - Pass information up a parse tree
+- **Inherited attributes**
+  - Pass information down or across a tree
+    - (From parents/siblings)
+- **Intrinsic attributes**
+  - Determined *outside* the parse tree
+    - Ex: type given from symbol table
+
+### Semantic Functions
+
+You apply the rules to the attributes.
+
+As an example:
+
+Syntax: <assign> -> <var> = <expr> 
+Semantic Rule: <expr>.expected_type <- <var>.actual_type
+
+The expected type of <expr> is the actual type of <var>
+
+### Predicate Functions
+
+Set of boolean expressions on the attributes.
+
+Every predicate must be true or its in violation of the sytnax or static semantic rules
+
+As an example:
+
+Syntax: <expr> -> <var>
+Semantic Rule: <expr>.actual_type <- <var>.actual_type
+Predicate: <expr>.actual_type == <expr>.expected_type
+
+The actual type of the expression must match the expected type
+
+- If all attributes are **inherited**, the evaluation process can be done in a **top-down order**
+- Alternatively, if all attributes are **synthesized**, the evaluation can proceed in a **bottom-up order**
+- Determining attribute evaluation order for any attribute grammar is a complex problem, requiring the construction of a dependency graph to show all attribute dependencies
+
+## Dynamic Semantics
+
+*Note:* no single widely accepted notation
+
+Two common approach: Operation and Denotational
+
+### Operational
+
+Describe a programs meaning in terms of its machine implementation.
+
+The *change in state* defines the meaning of a statement
+
+**Natural operational semantics** are used to describe the final execution result of a complete program (Big Step)
+
+Example: (1+2) + (3+4) = 10
+
+**Structural operational semantics** are used to determine the precise meaning of a single statement (Small Step)
+
+Example: 1 + 2 + (3+4) = 1 + 2 + 7
+
+- Advantages
+  - Simple and Intuitive for small examples
+  - Useful for implementation
+- Disadvantages
+  - Very complex for large programs
+  - Lacks mathematical rigor
