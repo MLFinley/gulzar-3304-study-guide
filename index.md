@@ -123,7 +123,7 @@ Extensions of BNF
 
 ![](images/fig2.png)
 
-## DFA/NFA
+### DFA/NFA
 
 Each of these is a graph which represents a state machine made of
 
@@ -148,3 +148,54 @@ Trans(State, input) = States reachable by using the input once or using epsilon 
 Replace all states with the same transitions
 
 *Note:* 2 states dont have the same transitions if one is a final state and the other is a non final state
+
+## Grammar Classes
+
+- **LL(1)** 
+  - L: scans input left to right
+  - L: produces a leftmost derivation
+  - 1: uses one input symbol of *look ahead*
+  - Top down
+    - Build parse tree from root
+    - Find derivation for string
+- **LR:** left-to-right, rightmost derivation
+  - L: left to right
+  - L: produces a right most derivation *in reverse*
+  - 1: one symbol look ahead
+  - Bottom up
+    - Build parse tree from leaves
+    - Reduce string to start symbol
+
+### Recursive Descent Algorithm
+
+- if there is only one RHS then
+  - **for each terminal in the RHS**
+    - **compare it with the next input token**
+    - **if they match, then continue**
+    - else report an error
+  - **for each nonterminal in the RHS**
+    - **call its corresponding subprogram and try match**
+  - if no success report error
+- else// there is more than one RHS
+  - **choose the RHS based on the next input token (the lookahead)**
+  - **for each chosen RHS**
+    - **call the corresponding subprogram and try match**
+  - if no success report error
+- if matches not found report error
+
+Notes:
+
+- O(n^3)
+- May require back tracking
+- LL(1) does not allow back tracking
+  - By applying the look ahead we can decide which one to apply
+  - Reduces time complexity to O(n)
+
+Non-LL grammars can be converted to LL(1) via
+
+- left recursion elimination
+- left factoring by extracting common prefixes
+- *Note* this is necessary but **insufficient**
+  - Define a "disambiguating rule"
+
+
