@@ -163,7 +163,7 @@ Analysis</h2>
 </ul></li>
 </ul>
 <p><img src="images/fig2.png" /></p>
-<h2 id="dfanfa">DFA/NFA</h2>
+<h3 id="dfanfa">DFA/NFA</h3>
 <p>Each of these is a graph which represents a state machine made of</p>
 <ul>
 <li>A finite set of states (Q)</li>
@@ -192,3 +192,85 @@ using epsilon as many times</p>
 <p>Replace all states with the same transitions</p>
 <p><em>Note:</em> 2 states dont have the same transitions if one is a
 final state and the other is a non final state</p>
+<h2 id="grammar-classes">Grammar Classes</h2>
+<ul>
+<li><strong>LL(1)</strong>
+<ul>
+<li>L: scans input left to right</li>
+<li>L: produces a leftmost derivation</li>
+<li>1: uses one input symbol of <em>look ahead</em></li>
+<li>Top down
+<ul>
+<li>Build parse tree from root</li>
+<li>Find derivation for string</li>
+</ul></li>
+</ul></li>
+<li><strong>LR:</strong> left-to-right, rightmost derivation
+<ul>
+<li>L: left to right</li>
+<li>L: produces a right most derivation <em>in reverse</em></li>
+<li>1: one symbol look ahead</li>
+<li>Bottom up
+<ul>
+<li>Build parse tree from leaves</li>
+<li>Reduce string to start symbol</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="recursive-descent-algorithm-ll">Recursive Descent Algorithm
+(LL)</h3>
+<ul>
+<li>if there is only one RHS then
+<ul>
+<li><strong>for each terminal in the RHS</strong>
+<ul>
+<li><strong>compare it with the next input token</strong></li>
+<li><strong>if they match, then continue</strong></li>
+<li>else report an error</li>
+</ul></li>
+<li><strong>for each nonterminal in the RHS</strong>
+<ul>
+<li><strong>call its corresponding subprogram and try
+match</strong></li>
+</ul></li>
+<li>if no success report error</li>
+</ul></li>
+<li>else// there is more than one RHS
+<ul>
+<li><strong>choose the RHS based on the next input token (the
+lookahead)</strong></li>
+<li><strong>for each chosen RHS</strong>
+<ul>
+<li><strong>call the corresponding subprogram and try
+match</strong></li>
+</ul></li>
+<li>if no success report error</li>
+</ul></li>
+<li>if matches not found report error</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>O(n^3)</li>
+<li>May require back tracking</li>
+<li>LL(1) does not allow back tracking
+<ul>
+<li>By applying the look ahead we can decide which one to apply</li>
+<li>Reduces time complexity to O(n)</li>
+</ul></li>
+</ul>
+<p>Non-LL grammars can be converted to LL(1) via</p>
+<ul>
+<li>left recursion elimination</li>
+<li>left factoring by extracting common prefixes</li>
+<li><em>Note</em> this is necessary but <strong>insufficient</strong>
+<ul>
+<li>Define a “disambiguating rule”</li>
+</ul></li>
+</ul>
+<p><img src="images/fig5.png" /></p>
+<h3 id="bottom-up-parsing-lr">Bottom up parsing (LR)</h3>
+<p>Scan the string to look for a substring that matches the right side
+of some production</p>
+<p>Two operations - Shift: put token on to stack - Reduce: apply rule to
+elements in stack</p>
+<p><img src="images/fig6.png" /></p>
