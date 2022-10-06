@@ -375,3 +375,64 @@ determine the precise meaning of a single statement (Small Step)</p>
 <li>Lacks mathematical rigor</li>
 </ul></li>
 </ul>
+<h1 id="variables">Variables</h1>
+<p>Program <strong>variable</strong> is an abstraction of memory with
+several attributes</p>
+<ul>
+<li>Name</li>
+<li>Address</li>
+<li>Type</li>
+<li>Scope
+<ul>
+<li>Range which varaible is visible</li>
+</ul></li>
+<li>Lifetime
+<ul>
+<li>Time which a variable is bound to a location</li>
+</ul></li>
+</ul>
+<p>A <strong>binding</strong> is an association between two things, such
+as a name and the thing it names</p>
+<p><strong>Binding time</strong> is the time at which a binding takes
+place</p>
+<p>Possible Times</p>
+<ul>
+<li>Language Design Time
+<ul>
+<li>Operator Symbols to Operations</li>
+</ul></li>
+<li>Language Implementation Time
+<ul>
+<li>Floating Point Type to Representation</li>
+</ul></li>
+<li>Compile Time
+<ul>
+<li>Variable to a Type (C/Java)</li>
+</ul></li>
+<li>Load Time
+<ul>
+<li>Variable to Memory (Static Vars)</li>
+</ul></li>
+<li>Run Time
+<ul>
+<li>Variable to Memory (Local Vars)</li>
+</ul></li>
+</ul>
+<p><strong>Static Binding</strong> occurs before run time
+<strong>and</strong> remains unchanged throughout program execution.</p>
+<p><strong>Dynamic Binding</strong> occurs during exeuction</p>
+<p>As binding time gets earlier:</p>
+<ul>
+<li>execution efficiency goes up</li>
+<li>safety goes up</li>
+<li>flexibility goes down</li>
+</ul>
+<p>Compiled languages bind earlier. Interpreted languages bind
+later.</p>
+<p><strong>Allocation:</strong> Getting memory to bind a variable</p>
+<p><strong>Deallocation:</strong> Returning memory for dead variable</p>
+<p><strong>Lifetime:</strong> Time when variable is bound to memory</p>
+<p>If an objects memory outlives its access binding, we get
+<strong>garbage</strong></p>
+<p>If an object access binding out lives its memory we get a
+<strong>dangling reference</strong></p>

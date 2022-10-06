@@ -303,3 +303,55 @@ Example: 1 + 2 + (3+4) = 1 + 2 + 7
 - Disadvantages
   - Very complex for large programs
   - Lacks mathematical rigor
+
+# Variables
+
+Program **variable** is an abstraction of memory with several attributes
+
+- Name
+- Address
+- Type
+- Scope
+  - Range which varaible is visible
+- Lifetime
+  - Time which a variable is bound to a location
+
+A **binding** is an association between two things, such as a name and the thing it names
+
+**Binding time** is the time at which a binding takes place
+
+Possible Times
+
+- Language Design Time
+  - Operator Symbols to Operations
+- Language Implementation Time
+  - Floating Point Type to Representation
+- Compile Time
+  - Variable to a Type (C/Java)
+- Load Time
+  - Variable to Memory (Static Vars)
+- Run Time
+  - Variable to Memory (Local Vars)
+
+**Static Binding** occurs before run time **and** remains unchanged throughout program execution.
+
+**Dynamic Binding** occurs during exeuction
+
+As binding time gets earlier:
+
+- execution efficiency goes up
+- safety goes up
+- flexibility goes down
+
+Compiled languages bind earlier. Interpreted languages bind later.
+
+**Allocation:** Getting memory to bind a variable
+
+**Deallocation:** Returning memory for dead variable
+
+**Lifetime:** Time when variable is bound to memory
+
+If an objects memory outlives its access binding, we get **garbage**
+
+If an object access binding out lives its memory we get a **dangling reference**
+
