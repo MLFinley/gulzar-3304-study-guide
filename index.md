@@ -166,7 +166,7 @@ Replace all states with the same transitions
     - Build parse tree from leaves
     - Reduce string to start symbol
 
-### Recursive Descent Algorithm
+### Recursive Descent Algorithm (LL)
 
 - if there is only one RHS then
   - **for each terminal in the RHS**
@@ -198,4 +198,15 @@ Non-LL grammars can be converted to LL(1) via
 - *Note* this is necessary but **insufficient**
   - Define a "disambiguating rule"
 
+![](images/fig5.png)
+
+### Bottom up parsing (LR)
+
+Scan the string to look for a substring that matches the right side of some production
+
+Two operations
+- Shift: put token on to stack
+- Reduce: apply rule to elements in stack
+
+![](images/fig6.png)
 
