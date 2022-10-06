@@ -1,1 +1,194 @@
-<p>Test 123</p>
+<h1 id="textbook-link"><a
+href="http://www.djnutte.com/pdf/Fall%202020%20Concepts%20of%20Programming%20Languages%2012th%20Edition%20.pdf">Textbook
+Link</a></h1>
+<h1 id="what-is-a-language">What is a language?</h1>
+<h2 id="syntax">Syntax</h2>
+<p>Describe what a program <strong>looks</strong> like.</p>
+<p>Specified using <strong>regular expressions</strong> and
+<strong>context-free grammars</strong></p>
+<h2 id="semantics">Semantics</h2>
+<p>Describes what a program <strong>means</strong>.</p>
+<p>Specified using <em>axiomatic, operational or denotational</em>
+semantics.</p>
+<h2 id="regular-expressions">Regular Expressions</h2>
+<p>A unified representation for a set of strings. Constructed with</p>
+<ul>
+<li><code>a</code> A character</li>
+<li><code>ε</code> The empty string denoted</li>
+<li><code>.</code> Concatenation
+<ul>
+<li>a.B =&gt; aB</li>
+</ul></li>
+<li><code>|</code> “Or”
+<ul>
+<li>A|B =&gt; “A”, “B”</li>
+</ul></li>
+<li><code>*</code> Kleene star (zero or more)
+<ul>
+<li>B* =&gt; ““,”B”, “BB”, “BBB”, ….</li>
+</ul></li>
+<li><code>+</code> one or more
+<ul>
+<li>c+ =&gt; “c”, “cc”, “ccc”, …</li>
+</ul></li>
+<li><code>[]</code> selects any char
+<ul>
+<li>[abc] =&gt; “a”, “b”, “c”</li>
+</ul></li>
+<li><code>[]+</code> subcomoment with 1 or more instance
+<ul>
+<li>[ab]+ =&gt; “a”, “b”, “aa”, “ab”, “aba”, “ba”, …</li>
+</ul></li>
+<li><code>-</code> defines a range
+<ul>
+<li>[0-9] digits</li>
+<li>[A-Z] uppercase letters</li>
+</ul></li>
+</ul>
+<h2 id="lexeme-token-pattern">Lexeme, Token, &amp; Pattern</h2>
+<p><strong>Lexeme:</strong></p>
+<p>A sequence of characters in the source program with the lowest level
+of syntactic meanings.</p>
+<p><strong>Token:</strong></p>
+<ul>
+<li>A category of lexemes</li>
+<li>A lexeme is an instace of a token</li>
+<li>Basic building blocks of programs</li>
+</ul>
+<p><strong>Examples</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Lexeme Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>keyword</td>
+<td><code>if else</code></td>
+</tr>
+<tr class="even">
+<td>comparison</td>
+<td><code>&lt;=, !=, ==</code></td>
+</tr>
+<tr class="odd">
+<td>number</td>
+<td><code>0</code></td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td><code>pi, score d2</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pattern:</strong></p>
+<ul>
+<li>Description of the form of lexemes</li>
+<li>Specified with regular expressions</li>
+<li>Pattern for identifies is <code>letter(letter|digit|_)*</code></li>
+</ul>
+<h2 id="context-free-grammar">Context Free Grammar</h2>
+<p>Uses <strong>BNF</strong> notation</p>
+<ul>
+<li><strong>Terminals:</strong> basic symbols which form strings</li>
+<li><strong>Non-Terminals:</strong> syntaxtic variables to impose the
+structure
+<ul>
+<li>Ex: <exp>, <stmt></li>
+</ul></li>
+<li><strong>Start-Symbol:</strong> a <em>non-terminal</em> you always
+start with</li>
+<li><strong>Production:</strong> Rules for how to replace non-terminals
+<ul>
+<li>Ex: <if_stmt> -&gt; if <expr> then <stmt> | if <expr> then <stmt>
+else <stmt></li>
+</ul></li>
+<li><strong>Derivation:</strong> Repeatedly applying rules to
+nonterminals gives us a string only terminals.</li>
+<li><strong>Sentence:</strong> A string with only terminals</li>
+<li><strong>Sentinal Form:</strong> A string with terminals and
+non-terminals</li>
+<li><strong>Left recursion:</strong> Recursion occurs on the left
+<ul>
+<li>Ex: E -&gt; E + T | T</li>
+</ul></li>
+<li><strong>Right recursion:</strong> Recursion occurs on the right
+<ul>
+<li>Ex: E -&gt; T | T + E</li>
+</ul></li>
+<li><strong>Leftmost derivation:</strong> Derivation using the left-most
+non-terminal.
+<ul>
+<li>Creates a <em>left-sentinal form</em></li>
+</ul></li>
+<li><strong>Rightmost derivation:</strong> Derivation using the
+right-most non-terminal.
+<ul>
+<li>Creates a <em>right-sentintal form</em></li>
+</ul></li>
+<li><em>Note</em> some derivations are neither left not right</li>
+</ul>
+<h1 id="big-picture">Big Picture</h1>
+<p><img src="images/fig1.png" /></p>
+<h2 id="parse-tree">Parse Tree</h2>
+<p>A parse tree is a hierarchal representation of a derivation as a
+tree.</p>
+<p>A grammar is *<strong>ambiguous</strong> if a senintal form has more
+than 1 unique parse tree.</p>
+<p><strong>Associativity:</strong> group left to right or right to left
+[Ex: (10 - 4) - 3 vs 10 - (4 - 3)]</p>
+<p><strong>Precedence:</strong> order of operations. Think PEMDAS</p>
+<p>Ambiguous grammars don’t capture these properties</p>
+<p><strong>EBNF</strong></p>
+<p>Extensions of BNF</p>
+<ul>
+<li><code>*</code> 0 or more</li>
+<li><code>()</code> alternative parts</li>
+<li><code>[]</code> optional parts</li>
+</ul>
+<h2 id="lexical-and-syntactic-analysis">Lexical and Syntactic
+Analysis</h2>
+<ul>
+<li>Lexical Analysis (Scanner) turns characters into tokens
+<ul>
+<li>Uses regular expressions</li>
+<li>Reports lexical errors</li>
+<li>Removes comments and white space</li>
+<li>Expand macros and implement preprocessor functions</li>
+</ul></li>
+<li>Syntactic Analysis (Parse) turns tokens into a parse tree
+<ul>
+<li>Uses the BNF to verify the structure</li>
+</ul></li>
+</ul>
+<p><img src="images/fig2.png" /></p>
+<h2 id="dfanfa">DFA/NFA</h2>
+<p>Each of these is a graph which represents a state machine made of</p>
+<ul>
+<li>A finite set of states (Q)</li>
+<li>A finite set of input symbols (E)</li>
+<li>An initial start state</li>
+<li>A set of accept states</li>
+<li>Transition functions
+<ul>
+<li>DFA transition functions take a state and input and output
+<strong>1</strong> state
+<ul>
+<li>Q x E -&gt; Q</li>
+</ul></li>
+<li>NFA transition functions take a state and input and output
+<strong>Multiple</strong> states
+<ul>
+<li>Q x E -&gt; P(Q)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="images/fig3.png" /></p>
+<h3 id="nfa-to-dfa">NFA to DFA</h3>
+<p>Trans(State, input) = States reachable by using the input once or
+using epsilon as many times</p>
+<h3 id="minimize-dfa">Minimize DFA</h3>
+<p>Replace all states with the same transitions</p>
+<p><em>Note:</em> 2 states dont have the same transitions if one is a
+final state and the other is a non final state</p>

@@ -1,6 +1,4 @@
-# Textbook Link
-
-http://www.djnutte.com/pdf/Fall%202020%20Concepts%20of%20Programming%20Languages%2012th%20Edition%20.pdf
+# [Textbook Link](http://www.djnutte.com/pdf/Fall%202020%20Concepts%20of%20Programming%20Languages%2012th%20Edition%20.pdf)
 
 # What is a language?
 
@@ -19,6 +17,7 @@ Specified using *axiomatic, operational or denotational* semantics.
 ## Regular Expressions
 
 A unified representation for a set of strings. Constructed with
+
 - `a` A character
 - `ε` The empty string denoted
 - `.` Concatenation 
@@ -67,6 +66,7 @@ id | `pi, score d2`
 ## Context Free Grammar
 
 Uses **BNF** notation
+
 - **Terminals:** basic symbols which form strings
 - **Non-Terminals:** syntaxtic variables to impose the structure
   - Ex: <exp>, <stmt>
@@ -86,4 +86,65 @@ Uses **BNF** notation
 - **Rightmost derivation:** Derivation using the right-most non-terminal.
   - Creates a *right-sentintal form*
 - *Note* some derivations are neither left not right
-- 
+
+# Big Picture
+
+![](images/fig1.png)
+
+## Parse Tree
+
+A parse tree is a hierarchal representation of a derivation as a tree.
+
+A grammar is ***ambiguous** if a senintal form has more than 1 unique parse tree.
+
+**Associativity:** group left to right or right to left [Ex: (10 - 4) - 3 vs 10 - (4 - 3)]
+
+**Precedence:** order of operations. Think PEMDAS
+
+Ambiguous grammars don't capture these properties
+
+**EBNF**
+
+Extensions of BNF
+
+- `*` 0 or more
+- `()` alternative parts
+- `[]` optional parts
+
+## Lexical and Syntactic Analysis
+
+- Lexical Analysis (Scanner) turns characters into tokens
+  - Uses regular expressions
+  - Reports lexical errors
+  - Removes comments and white space
+  - Expand macros and implement preprocessor functions
+- Syntactic Analysis (Parse) turns tokens into a parse tree
+  - Uses the BNF to verify the structure
+
+![](images/fig2.png)
+
+## DFA/NFA
+
+Each of these is a graph which represents a state machine made of
+
+- A finite set of states (Q)
+- A finite set of input symbols (E)
+- An initial start state
+- A set of accept states
+- Transition functions
+  - DFA transition functions take a state and input and output **1** state
+    - Q x E -> Q
+  - NFA transition functions take a state and input and output **Multiple** states
+    - Q x E -> P(Q)
+
+![](images/fig3.png)
+
+### NFA to DFA
+
+Trans(State, input) = States reachable by using the input once or using epsilon as many times
+
+### Minimize DFA
+
+Replace all states with the same transitions
+
+*Note:* 2 states dont have the same transitions if one is a final state and the other is a non final state
